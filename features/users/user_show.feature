@@ -7,3 +7,4 @@ Feature: Show Users
       Given I am a user named "foo" with an email "user@test.com" and password "please"
       When I go to the homepage
       Then I should see "User: foo"
+

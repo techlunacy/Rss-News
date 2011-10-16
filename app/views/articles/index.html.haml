@@ -1,0 +1,13 @@
+%h1 Listing articles
+%ul
+  %li= link_to 'New Article', new_article_path if user_signed_in?
+  %li= link_to 'New Feed', new_feed_path if user_signed_in?
+- @articles.each do |article|
+  %aside{:class => "article"}
+    %div= link_to article.title, article.url
+    %div= article.body
+    %div
+      %span= link_to 'Show', article
+      %span= link_to 'Edit', edit_article_path(article) if user_signed_in?
+      %span= link_to 'Destroy', article, :confirm => 'Are you sure?', :method => :delete if user_signed_in?
+

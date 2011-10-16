@@ -1,5 +1,5 @@
 require 'rbconfig'
-HOST_OS = Config::CONFIG['host_os']
+HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 group :assets do
@@ -43,3 +43,6 @@ gem "mongoid", ">= 2.3.0"
 gem "devise", ">= 1.4.7"
 gem "frontend-helpers"
 gem "rails-footnotes", ">= 3.7", :group => :development
+gem "validate_url"
+gem "faker", "~> 1.0.1", :group => [:development, :test]
+

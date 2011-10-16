@@ -1,3 +1,8 @@
+Then /^I go to the homepage$/ do
+  visit('/')
+end
+
+
 Given /^no user exists with an email of "(.*)"$/ do |email|
   User.find(:first, :conditions => { :email => email }).should be_nil
 end
@@ -23,7 +28,9 @@ Given /^I am signed up as "(.*)\/(.*)"$/ do |email, password|
   Then %{I should see "You have signed up successfully. If enabled, a confirmation was sent to your e-mail."}
   And %{I am logout}
 end
-
+Then /^I should see "([^"]*)"$/ do |arg1|
+  page.has_content?(arg1)
+end
 Then /^I sign out$/ do
   visit('/users/sign_out')
 end
@@ -57,3 +64,58 @@ Then /^I should be signed out$/ do
   And %{I should see "Login"}
   And %{I should not see "Logout"}
 end
+
+When /^I go to the sign in page$/ do
+  visit('/users/sign_in')
+end
+
+Given /^I am on the home page$/ do
+  visit('/')
+end
+
+Given /^I go to the sign up page$/ do
+  visit('/users/sign_up')
+end
+
+Given /^I fill in the following:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  table.rows_hash.each do |key, value|
+    fill_in key, :with => value
+  end
+end
+
+Given /^I press "([^"]*)"$/ do |arg1|
+  click_on(arg1)
+end
+
+When /^I follow "([^"]*)"$/ do |arg1|
+  click_link(arg1)
+end
+
+When /^I fill in "([^"]*)" with "([^"]*)"$/ do |arg1, arg2|
+  fill_in arg1, :with => arg2
+
+end
+
+Given /^I am on the homepage$/ do
+  visit('/')
+end
+
+Then /^I go to the home page$/ do
+  visit('/')
+end
+
+Then /^I should not see "([^"]*)"$/ do |arg1|
+  not page.has_content? arg1
+end
+
+Given /^I am signed in as "(.*)\/(.*)"$/ do |email, password|
+  User.new(:name => email,
+            :email => email,
+            :password => password,
+            :password_confirmation => password).save!
+  Given %{I sign in as "#{email}/#{password}"}
+  And %{I go to the homepage}
+  Then %{I should be already signed in}
+end
+
