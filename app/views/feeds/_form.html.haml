@@ -15,11 +15,15 @@
   .field
     = f.label :feed_url
     = f.text_field :feed_url
+    = f.submit 'get feed details'
   .field
     = f.label :etag
     = f.text_field :etag
   .field
     = f.label :last_modified
     = f.datetime_select :last_modified
+  .field
+    = f.label :is_valid
+    = f.check_box :is_valid
   .actions
     = f.submit 'Save'

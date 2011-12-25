@@ -5,4 +5,5 @@ class Feed
   field :feed_url, :type => String
   field :etag, :type => String
   field :last_modified, :type => Time
+  field :is_valid, :type => Boolean
 end
